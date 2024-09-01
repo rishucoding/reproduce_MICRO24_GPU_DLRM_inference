@@ -28,6 +28,11 @@ python setup.py develop && python -c "import torch"
 #Verify pytorch is installed successfully by [python -c "import torch; print(torch.__version__)"]
 ```
 
+### Paths 
+* Set appropriate paths for 'data_paths_lst' and 'hot_paths_lst' in the scripts/quick.sh and scripts/l2_quick.sh files.
+* Set appropriate paths for 'filename' in scripts/parser_Kernel_ET.py
+* Example: the path '/scratch1/rzj5233/problem2/reproduce_MICRO24_GPU_DLRM_inference/scripts/log' can be modified to '~/reproduce_MICRO24_GPU_DLRM_inference/scripts/log' where 'reproduce_MICRO24_GPU_DLRM_inference' is cloned repository
+
 ### To run the baseline inference on GPU
 ```
 cd scripts
