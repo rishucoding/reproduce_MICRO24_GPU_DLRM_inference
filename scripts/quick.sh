@@ -8,7 +8,7 @@ PyGetCore='import sys; c=int(sys.argv[1]); print(",".join(str(2*i) for i in rang
 
 # set number of OMP threads, and GPU id: pick between [0,1,2,3,4,5,6,7] based on the availability from nvidia-smi check.
 THREADS=1
-GPU_ID=2
+GPU_ID=0
 device="gpu"
 
 data_paths_lst=('/scratch1/rzj5233/problem2/reproduce_MICRO24_GPU_DLRM_inference/datasets/reuse_high/table_500K.txt' '/scratch1/rzj5233/problem2/reproduce_MICRO24_GPU_DLRM_inference/datasets/reuse_medium/table_500K.txt' '/scratch1/rzj5233/problem2/reproduce_MICRO24_GPU_DLRM_inference/datasets/reuse_low/table_500K.txt' '/scratch1/rzj5233/problem2/reproduce_MICRO24_GPU_DLRM_inference/datasets/random_500K.txt')
@@ -29,7 +29,7 @@ for data_path in "${data_paths_lst[@]}"; do
         IFS=','; set -- $e; EMB_DIM=$1; EMB_ROW=$2; EMB_TBL=$3; EMB_LS=$4; unset IFS;
         EMB_TBL=$(python -c "$PyGenTbl" "$EMB_ROW" "$EMB_TBL")
         C=$(python -c "$PyGetCore" "$THREADS")
-        OMP_NUM_THREADS=$THREADS CUDA_VISIBLE_DEVICES=$GPU_ID taskset -c 63 $CONDA_PREFIX/bin/python load_emb.py --device $device --num-batches $NUM_BATCH --batch-size $BS --lookups-per-sample $EMB_LS --arch-sparse-feature-size $EMB_DIM --arch-embedding-size $EMB_TBL --data-generation=$DATA_GEN_PATH --output-name $cntr
+        OMP_NUM_THREADS=$THREADS CUDA_VISIBLE_DEVICES=$GPU_ID taskset -c 0 $CONDA_PREFIX/bin/python load_emb.py --device $device --num-batches $NUM_BATCH --batch-size $BS --lookups-per-sample $EMB_LS --arch-sparse-feature-size $EMB_DIM --arch-embedding-size $EMB_TBL --data-generation=$DATA_GEN_PATH --output-name $cntr
         ((cntr++))
         echo ""
         echo ""

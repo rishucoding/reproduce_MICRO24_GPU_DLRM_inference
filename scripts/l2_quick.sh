@@ -8,7 +8,7 @@ PyGetCore='import sys; c=int(sys.argv[1]); print(",".join(str(2*i) for i in rang
 
 # set number of OMP threads, and GPU id: pick between [0,1,2,3,4,5,6,7] based on the availability from nvidia-smi check.
 THREADS=1
-GPU_ID=2
+GPU_ID=0
 device="gpu"
 
 data_paths_lst=('/scratch1/rzj5233/problem2/reproduce_MICRO24_GPU_DLRM_inference/datasets/reuse_high/table_500K.txt' '/scratch1/rzj5233/problem2/reproduce_MICRO24_GPU_DLRM_inference/datasets/reuse_medium/table_500K.txt' '/scratch1/rzj5233/problem2/reproduce_MICRO24_GPU_DLRM_inference/datasets/reuse_low/table_500K.txt' '/scratch1/rzj5233/problem2/reproduce_MICRO24_GPU_DLRM_inference/datasets/random_500K.txt')
